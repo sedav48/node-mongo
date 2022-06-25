@@ -56,7 +56,7 @@ partnerRouter.route('/:partnerId')
 .put((req, res, next) => {
    Partner.findByIdAndUpdate(req.params.partnerId, {
       $set: req.body //mongodb variable $
-   }, { new: true } //requires boolean as true
+   }, { new: true }) //requires boolean as true
    .then(partner => {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
