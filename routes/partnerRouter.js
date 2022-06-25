@@ -54,7 +54,7 @@ partnerRouter.route('/:partnerId')
    res.end(`POST operation not supported on /partners/${req.params.partnerId}`);
 })
 .put((req, res, next) => {
-   Partner.findByIdAndUpdate(req.params.partnerId), {
+   Partner.findByIdAndUpdate(req.params.partnerId, {
       $set: req.body //mongodb variable $
    }, { new: true } //requires boolean as true
    .then(partner => {
