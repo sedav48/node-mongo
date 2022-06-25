@@ -8,10 +8,10 @@ const partnerRouter = express.Router();
 partnerRouter.route('/')
 .get((req, res, next) => {
    Partner.find() //API call, returns Promises
-   .then(partners => {
+   .then(partner => {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json'); //fetch data
-      res.json(partners); //send json data to the client 
+      res.json(partner); //send json data to the client 
    })
    .catch(err => next(err));
 })
