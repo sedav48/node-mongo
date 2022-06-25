@@ -60,7 +60,7 @@ partnerRouter.route('/:partnerId')
    .then(partner => {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json');
-      res.json()
+      res.json(partner)
    })
    .catch(err => next(err));
 })
