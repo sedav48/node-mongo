@@ -4,7 +4,6 @@ const Promotion = require('../models/promotion');
 const promotionRouter = express.Router();
 
 
-
 promotionRouter.route('/')
 .get((req, res, next) => {
     Promotion.find()
