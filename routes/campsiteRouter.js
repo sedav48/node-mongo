@@ -189,6 +189,8 @@ campsiteRouter.route('/:campsiteId/comments')
             err.status = 404;
             return next(err);
         }
+    
+    
     })
     .catch(err => next(err));
 })
@@ -216,4 +218,5 @@ campsiteRouter.route('/:campsiteId/comments')
     })
     .catch(err => next(err));
 });
+
 module.exports = campsiteRouter;
