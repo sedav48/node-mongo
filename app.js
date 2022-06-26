@@ -39,7 +39,7 @@ function auth(req, res, next) {
   console.log(req.headers);
   const authHeader = req.headers.authorization;
   if (!authHeader) {
-    const err = new Error('You are not authenicated!');
+    const err = new Error('You are not authenticated!');
     res.setHeader('WWW-Authenicate', 'Basic');
     err.status = 401;
     return next(err);
@@ -51,12 +51,14 @@ function auth(req, res, next) {
   if (user === 'admin' && pass === 'password') {
       return next(); //authorized
   } else {
-    const err = new Error('You are not authenicated!');
+    const err = new Error('You are not authenticated!');
     res.setHeader('WWW-Authenicate', 'Basic');
     err.status = 401;
     return next(err);
   }
 }
+
+app.use(auth);
 
 app.use(express.static(path.join(__dirname, 'public')));
 
