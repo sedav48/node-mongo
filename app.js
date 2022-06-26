@@ -40,7 +40,7 @@ function auth(req, res, next) {
   const authHeader = req.headers.authorization;
   if (!authHeader) {
     const err = new Error('You are not authenticated!');
-    res.setHeader('WWW-Authenicate', 'Basic');
+    res.setHeader('WWW-Authenticate', 'Basic');
     err.status = 401;
     return next(err);
   }
@@ -52,7 +52,7 @@ function auth(req, res, next) {
       return next(); //authorized
   } else {
     const err = new Error('You are not authenticated!');
-    res.setHeader('WWW-Authenicate', 'Basic');
+    res.setHeader('WWW-Authenticate', 'Basic');
     err.status = 401;
     return next(err);
   }
