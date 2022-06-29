@@ -12,7 +12,7 @@ partnerRouter.route('/')
    .then(partner => {
       res.statusCode = 200;
       res.setHeader('Content-Type', 'application/json'); //fetch data
-      res.json(partner); //send json data to the client 
+      res.json(partners); //send json data to the client 
    })
    .catch(err => next(err));
 })
