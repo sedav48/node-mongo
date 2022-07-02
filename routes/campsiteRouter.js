@@ -220,7 +220,7 @@ campsiteRouter.route('/:campsiteId/comments')
             err = new Error(`Comment ${req.params.commentId} not found`);
             err.status = 404;
             return next(err);
-        }
+        
     } 
      else {          
         err = new Error(`${req.user_.id} is not the authorized author of this comment!`);
