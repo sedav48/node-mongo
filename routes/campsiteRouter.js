@@ -98,6 +98,7 @@ campsiteRouter.route('/:campsiteId/comments')
  .post(authenticate.verifyUser, (req, res, next) => {
     Campsite.findById(req.params.campsiteId)
     .then(campsite => {
+      
         if (campsite) {
             req.body.author = req.user_id;
             campsite.comments.push(req.body);
@@ -108,12 +109,16 @@ campsiteRouter.route('/:campsiteId/comments')
         res.json(campsite);
     })
     .catch(err => next(err));
-} else {
-    err = new Error(`Campsite ${req.params.campsiteId} not found`);
-    err.status = 404;
-    return next(err);
-    }
+    } else {
+            err = new Error(`Campsite ${req.params.campsiteId} not found`);
+            err.status = 404;
+            return next(err);
+     }
+    
+    
+
  })
+ 
  .catch(err => next(err));
 })
  .put(authenticate.verifyUser, authenticate.verifyAdmin, (req, res) => {
@@ -203,32 +208,33 @@ campsiteRouter.route('/:campsiteId/comments')
 .delete(authenticate.verifyUser, (req, res, next) => {
     Campsite.findById(req.params.campsiteId)
     .then(campsite => {
-        if (req.body.author.equals(req.user._id)) {
-        if (campsite && campsite.comments.id(req.params.commentId)) {
-            campsite.comments.id(req.params.commentId).remove();
-            campsite.save()
-            .then(campsite => {
-                res.statusCode = 200;
-                res.setHeader('Content-Type', 'application/json');
-                res.json(campsite);
+        if (req.body.author.equals(req.user._id))   {
+            if (campsite && campsite.comments.id(req.params.commentId)) {
+                campsite.comments.id(req.params.commentId).remove();
+                campsite.save()
+                .then(campsite => {
+                    res.statusCode = 200;
+                    res.setHeader('Content-Type', 'application/json');
+                    res.json(campsite);
             })
             .catch(err => next(err));
-        } else if (!campsite) {
-            err = new Error(`Campsite ${req.params.campsiteId} not found`);
-            err.status = 404;
-            return next(err);
-        } else {
-            err = new Error(`Comment ${req.params.commentId} not found`);
-            err.status = 404;
-            return next(err);
+            } else if (!campsite) {
+                err = new Error(`Campsite ${req.params.campsiteId} not found`);
+                err.status = 404;
+                return next(err);
+            } else {
+                err = new Error(`Comment ${req.params.commentId} not found`);
+                err.status = 404;
+                return next(err);
+            }
         }
-    }
-    else {          
-        err = new Error(`${req.user_.id} is not the authorized author of this comment!`);
-        err.status = 404;
-        return next(err);
-     }
- })
+         else {          
+            err = new Error(`${req.user_.id} is not the authorized author of this comment!`);
+            err.status = 404;
+            return next(err);
+          }
+        
+    })
     .catch(err => next(err));
 });
 
