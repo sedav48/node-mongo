@@ -203,7 +203,7 @@ campsiteRouter.route('/:campsiteId/comments')
 .delete(authenticate.verifyUser, (req, res, next) => {
     Campsite.findById(req.params.campsiteId)
     .then(campsite => {
-      if (req.body.author.equals(req.user._id)) {
+        if (req.body.author.equals(req.user._id)) {
         if (campsite && campsite.comments.id(req.params.commentId)) {
             campsite.comments.id(req.params.commentId).remove();
             campsite.save()
@@ -222,14 +222,13 @@ campsiteRouter.route('/:campsiteId/comments')
             err.status = 404;
             return next(err);
         }
-    } 
-     else {          
-        err = new Error(`${req.verifyAdmin} is not the authorized author of this comment!`);
+    }
+    else {          
+        err = new Error(`${req.user_.id} is not the authorized author of this comment!`);
         err.status = 404;
         return next(err);
      }
-     
-    })
+ })
     .catch(err => next(err));
 });
 
