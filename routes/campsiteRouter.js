@@ -224,7 +224,7 @@ campsiteRouter.route('/:campsiteId/comments')
         }
     } 
      else {          
-        err = new Error(`${req.user_.id} is not the authorized author of this comment!`);
+        err = new Error(`${req.verifyAdmin} is not the authorized author of this comment!`);
         err.status = 403;
         return next(err);
      }
