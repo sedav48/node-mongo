@@ -26,14 +26,6 @@ app.set('secPort', port+443);
 var server = http.createServer(app);
 
 
-
-//  server.listen(app.get('setPort'), () => {
-//   console.log('Server listening on port', app.get('setPort'));
-// });
-// server.on('error', onError);
-// server.on('listening', onListening);
-
-
 /** 
  * * Create HTTPS server.
  */
